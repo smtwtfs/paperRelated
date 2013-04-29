@@ -1,19 +1,22 @@
-setwd("C:/Users/Yue/Documents/Academic/Research/DynamicNets/paperRelated")
-
-#source("functions.R")
-# covars <- c('RECTIME1','AGE','GENDER','ETHNIC','RACE','PNAME','SPF','SPTYPE','SPFSEX','SPLSEX','SP2PLY');
-# extractSPdata(covars)
-
-load("SPdata.RDATA")
-
-
+# setwd("C:/Users/Yue/Documents/Academic/Research/DynamicNets/paperRelated")
+# 
+# source("functions.R")
+# covars <- c('RECTIME1','AGE','GENDER','SPGNDR','ETHNIC','RACE','PNAME','SPF','SPTYPE','SP2PLY');
+# # 'SPFSEX','SPLSEX',
+# SPdata = extractSPdata(covars)
+# save(SPdata, file = 'SPdata.RDATA')
 
 
+load('SPdata.RDATA')
+source("functions.R")
 
+summ.list = list();
+# sex
+covars = c('GENDER', 'SPGNDR')
+summ = getColSummary(covars, SPdata)
 
-
-
-
+covars = c("RACE", "SPRACE")
+summ = getColSummary(covars, SPdata)
 
 
 
