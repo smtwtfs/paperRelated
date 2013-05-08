@@ -10,15 +10,51 @@
 load('SPdata.RDATA')
 source("functions.R")
 
-summ.list = list();
 # sex
-covars = c('GENDER', 'SPGNDR')
+input = "SPGNDR"
+num = seq(28)
+output= sapply(num,  function (x) paste(input, x ,sep = ""))
+covars = c('GENDER', output)
 summ = getColSummary(covars, SPdata)
 
-covars = c("RACE", "SPRACE")
-summ = getColSummary(covars, SPdata)
+# race
+input = "SPRACE"
+num = seq(28)
+output= sapply(num,  function (x) paste(input, x ,sep = ""))
+summ = getColSummary("RACE", SPdata)
+print(summ)
+summ = getColSummary(output, SPdata)
+print(summ)
 
 
+b# age
+age = SPdata[,which(colnames(SPdata) == "AGE")]
+age[age == 97] = -200
+age[age == 98] = -200
+age[age == 99] = -200
+age  = age[age != 200]
+
+save(age, file = "age.RDATA")
+
+
+input = "SPAGEO"
+index = grep(input, colnames(SPdata))
+age1 = as.matrix.data.frame(SPdata[,index])
+age1 = age1 + age %*%  matrix(1, nrow = 1, ncol =  length(index)) 
+
+input = "SPAGEY"
+index = grep(input, colnames(SPdata))
+age2 = as.matrix.data.frame(SPdata[,index])
+age2 = age %*%  matrix(1, nrow = 1, ncol =  length(index)) - age2
+
+output= sapply(num,  function (x) paste(input, x ,sep = ""))
+index = SPdata[,which(colnames(SPdata) == "AGE")]
+data = SPdata[,output]
+
+
+covars = c("SPAGEO","SPAGEY")
+
+summ = getColComb(covars,SPdata)
 
 ## Process SP data:
 ##    If SPLSEX has value and SPFEX does not have value, (started w/ partner more than 12 months ago)

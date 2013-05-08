@@ -3,20 +3,24 @@
 
 getColSummary <- function(covars, data){
   summ = NULL;
+  
   for(i in 1:length(covars)){
     
-    index <- grep(covars[i], colnames(data))  
+    index = which(colnames(data) == covars[i])
     
     if(length(index)){
-      for (i in 1:length(index)){
-        if(is.null(summ)){
-          summ = summary(data[,index[i]])
-        }else{
-          summ = summ + summary(data[,index[i]])
-        }
+      if(is.null(summ)){
+        summ = summary(data[,index])
+        
+      }else{
+        summ = summ + summary(data[,index])
       }
+#       print(paste("added:", colnames(data)[index]))
+#       print(summary(data[,index]))
+#       print(sum(summary(data[,index])))
     }
   }
+  
   return(summ)
 }
 

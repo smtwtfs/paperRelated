@@ -1,0 +1,11 @@
+Gender:
+	Male  Female 
+    4971    5200
+
+race:
+ white   black    hispanic    other
+ 7345    1797     609         362
+
+age: (age saved for sampling)
+  Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  18.00   28.00   35.00   36.41   44.00   60.00 
